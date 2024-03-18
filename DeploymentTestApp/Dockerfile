@@ -5,7 +5,7 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn install
 COPY . .
-RUN yarn build
+#RUN yarn build
 
 #Stage 2
 FROM nginx:1.19.0
