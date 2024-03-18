@@ -1,32 +1,54 @@
-
-name: ci
+ame: Docker Image CI
 
 on:
-  push:
-    branches:
-      - "main"
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+    inputs:
+      pushImage:
+        description: Publish image to repository
+        type: boolean
+        required: true
+        default: true
 
 jobs:
-  build:
-    name: Push Docker image to Docker Hub
+
+  test_and_publih:
+    name: Test and publish image
+
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v4
-      
-      - name: Install Node
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+
+      - name: Set build version
+        uses: dotnet/nbgv@master
+        id: nbgv
+        with:
+          setCommonVars: true
+
+      - name: Setup nodejs
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: '16.15.0'
+          cache: 'yarn'
 
       - name: Install dependencies
         run: yarn install
+
+      - name: Build
+        run: yarn build
 
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
