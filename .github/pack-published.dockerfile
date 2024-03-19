@@ -1,4 +1,4 @@
-FROM --platform=arm64 nginxinc/nginx-unprivileged:stable-alpine
+FROM --platform=linux/arm64/v8 nginxinc/nginx-unprivileged:stable-alpine
 ADD build /usr/share/nginx/html
 USER root
 RUN apk add --no-cache bash
