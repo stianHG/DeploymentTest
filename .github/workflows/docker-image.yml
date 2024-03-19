@@ -62,5 +62,5 @@ jobs:
           context: .
           file: .github/pack-published.dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: 0.9
           labels: ${{ steps.meta.outputs.labels }}
