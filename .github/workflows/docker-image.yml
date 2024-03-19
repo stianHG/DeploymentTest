@@ -14,10 +14,9 @@ on:
 
 jobs:
 
-  test_and_publih:
+  test_and_publish:
     name: Test and publish image
-
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
