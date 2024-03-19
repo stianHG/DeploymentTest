@@ -61,48 +61,48 @@ jobs:
           tags:  ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           
-  test_and_publish_macOS:
-    name: Test and publish image for mac
-    runs-on: ubuntu-latest
+  #test_and_publish_macOS:
+  #  name: Test and publish image for mac
+  #  runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v2
+#        with:
+#          fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+#
+#      - name: Setup node.js
+#        uses: actions/setup-node@v3
+#        with:
+#          node-version: '16.15.0'
+#          cache: 'yarn'
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
+#      - name: Install dependencies
+#        run: yarn install
 
-      - name: Setup node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.15.0'
-          cache: 'yarn'
+#      - name: Build
+#        run: yarn build
 
-      - name: Install dependencies
-        run: yarn install
+#      - name: Log in to Docker Hub
+#        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+#        with:
+#          username: ${{ secrets.DOCKER_USERNAME }}
+#          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build
-        run: yarn build
+#      - name: Extract metadata (tags, labels) for Docker
+#        id: meta
+#        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+#        with:
+#          images: stianhg/deployment_test_mac
 
-      - name: Log in to Docker Hub
-        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        with:
-          images: stianhg/deployment_test_mac
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
-        with:
-          context: .
-          file: .github/pack-published-mac.dockerfile
-          push: true
-          tags:  ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+#      - name: Build and push Docker image
+#        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+#        with:
+#          context: .
+#          file: .github/pack-published-mac.dockerfile
+#          push: true
+#          tags:  ${{ steps.meta.outputs.tags }}
+#          labels: ${{ steps.meta.outputs.labels }}
           
           
           
