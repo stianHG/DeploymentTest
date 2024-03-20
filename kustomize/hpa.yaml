@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: deployment_test
+  name: deploymenttest
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: dployment_test
+    name: dploymenttest
   minReplicas: 1
   maxReplicas: 1
   metrics:
