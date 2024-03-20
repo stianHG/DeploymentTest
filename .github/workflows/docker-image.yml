@@ -66,7 +66,7 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: |
-            stianhg/deployment_test
+            stianhg/deploymenttest
             ghcr.io/${{ github.repository }} 
         # ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
         # ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
