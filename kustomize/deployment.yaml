@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: deploymenttest
-        image: ghcr.io/stianHG/deployment_test:6.6.0
+        image: ghcr.io/stianHG/deploymenttest:main
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
