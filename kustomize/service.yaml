@@ -3,11 +3,12 @@ kind: Service
 metadata:
   name: deploymenttest
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: deploymenttest
   ports:
     - name: http
-      port: 9898
+      port: 3050
       protocol: TCP
-      targetPort: http   
+      targetPort: 3000   
+      nodePort: 31000
