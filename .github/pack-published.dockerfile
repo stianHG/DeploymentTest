@@ -6,7 +6,7 @@ COPY yarn.lock .
 RUN yarn install
 COPY . .
 RUN yarn build
-
+EXPOSE 3000
 #Stage 2
 FROM nginx:1.19.0
 WORKDIR /usr/share/nginx/html
