@@ -4,4 +4,4 @@ resources:
   - hpa.yaml
   - deployment.yaml
   - service-nodeport.yaml
-  - service-loadbalancer.yaml
+  # - service-loadbalancer.yaml
