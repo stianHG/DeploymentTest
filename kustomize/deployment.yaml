@@ -15,15 +15,8 @@ spec:
       containers:
       - name: deploymenttest
         image: ghcr.io/stianhg/deploymenttest:main
-        imagePullPolicy: IfNotPresent
-        resources:
-          limits:
-            cpu: 2000m
-            memory: 512Mi          
         ports:
-        - name: http
-          containerPort: 8090
-          protocol: TCP        
+        - containerPort: 8090
         env:
         - name: ENV_TEST
           value: "testValue"
