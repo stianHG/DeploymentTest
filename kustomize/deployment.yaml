@@ -22,7 +22,7 @@ spec:
             memory: 512Mi          
         ports:
         - name: http
-          containerPort: 80
+          containerPort: 8090
           protocol: TCP        
         env:
         - name: ENV_TEST
