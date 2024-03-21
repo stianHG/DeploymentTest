@@ -8,4 +8,4 @@ spec:
   type: LoadBalancer
   ports:
   - name: http
-    port: 8090
+    port: 80
