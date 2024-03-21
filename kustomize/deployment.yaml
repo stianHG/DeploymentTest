@@ -3,19 +3,12 @@ kind: Deployment
 metadata:
   name: deploymenttest
 spec:
-  minReadySeconds: 3
-  revisionHistoryLimit: 5
-  progressDeadlineSeconds: 60
-  strategy:
-    rollingUpdate:
-      maxUnavailable: 0
-    type: RollingUpdate
+  replicas: 2
   selector:
     matchLabels:
       app: deploymenttest
   template:
     metadata:
-      annotations:        
       labels:
         app: deploymenttest
     spec:
@@ -23,42 +16,14 @@ spec:
       - name: deploymenttest
         image: ghcr.io/stianhg/deploymenttest:main
         imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 512Mi          
         ports:
         - name: http
           containerPort: 9898
           protocol: TCP        
-        command:
-        - ./podinfo
-        - --port=9898        
-        - --level=info
-        - --random-delay=false
-        - --random-error=false
         env:
-        - name: UI_COLOR
-          value: "#34577c"
-        livenessProbe:
-          exec:
-            command:
-            - http
-            - localhost:9898/healthz
-          initialDelaySeconds: 5
-          timeoutSeconds: 5
-        readinessProbe:
-          exec:
-            command:
-            - http
-          initialDelaySeconds: 5
-          timeoutSeconds: 5
-        resources:
-          limits:
-            cpu: 2000m
-            memory: 512Mi
-          requests:
-            cpu: 100m
-            memory: 64Mi
-        volumeMounts:
-          - name: data
-            mountPath: /data
-      volumes:
-        - name: data
-          emptyDir: {}
+        - name: ENV_TEST
+          value: "testValue"
