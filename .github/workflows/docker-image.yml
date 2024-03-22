@@ -18,6 +18,16 @@ env:
   DOCKERHUB_USERNAME: stianhg
   
 jobs:
+  print_vars:
+    name: Print variables
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Print
+        run: |
+          echo Registry = ${{ env.REGISTRY}}
+          echo Repository name = ${{env.REPOSITORY_NAME}}
+          echo Dockerhub user name = ${{env.DOCKERHUB_USERNAME}}
+          
   test_and_publish_linux:
     name: Test and publish image for linux
     runs-on: ubuntu-latest
@@ -66,10 +76,8 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: |
-            stianhg/deploymenttest
-            ghcr.io/${{ github.repository }} 
-        # ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
-        # ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+            ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+            ${{ env.REGISTRY }}/${{ github.repository }}         
 
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
@@ -79,49 +87,4 @@ jobs:
           push: true
           tags:  ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          
-  #test_and_publish_macOS:
-  #  name: Test and publish image for mac
-  #  runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v2
-#        with:
-#          fetch-depth: 0 # avoid shallow clone so nbgv can do its work.
-#
-#      - name: Setup node.js
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: '16.15.0'
-#          cache: 'yarn'
-
-#      - name: Install dependencies
-#        run: yarn install
-
-#      - name: Build
-#        run: yarn build
-
-#      - name: Log in to Docker Hub
-#        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
-#        with:
-#          username: ${{ secrets.DOCKER_USERNAME }}
-#          password: ${{ secrets.DOCKER_PASSWORD }}
-
-#      - name: Extract metadata (tags, labels) for Docker
-#        id: meta
-#        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-#        with:
-#          images: stianhg/deployment_test_mac
-
-#      - name: Build and push Docker image
-#        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
-#        with:
-#          context: .
-#          file: .github/pack-published-mac.dockerfile
-#          push: true
-#          tags:  ${{ steps.meta.outputs.tags }}
-#          labels: ${{ steps.meta.outputs.labels }}
-          
-          
           
