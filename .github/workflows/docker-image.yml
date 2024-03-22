@@ -84,8 +84,8 @@ jobs:
           context: .
           file: .github/Dockerfile
           push: true
-          tags:  
-          # ${{ steps.meta.outputs.tags }}
-            1.0.1
+          tags: | 
+              ${{ steps.meta.outputs.tags }}
+              latest
           labels: ${{ steps.meta.outputs.labels }}
           
