@@ -15,6 +15,7 @@ spec:
       containers:
       - name: deploymenttest
         image: ghcr.io/stianhg/deploymenttest:main
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         env:
