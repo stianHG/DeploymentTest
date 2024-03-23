@@ -27,6 +27,7 @@ jobs:
         run: |
           echo Registry = ${{ env.REGISTRY}}
           echo Repository name = ${{github.repository}}
+          echo Token = ${{github.token}}
           echo Dockerhub user name = ${{env.DOCKERHUB_USERNAME}}
           
   test_and_publish_linux:
