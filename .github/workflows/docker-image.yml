@@ -82,7 +82,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ github.repository }}       
           tags: |
             type=semver,pattern={{major}}.{{minor}}
-       #     type=sha
+            type=sha
        #     type=schedule
        #     type=ref,event=branch
        #     type=ref,event=pr
