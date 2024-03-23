@@ -110,6 +110,7 @@ jobs:
         uses: 'WyriHaximus/github-action-next-release-version@1.0.0'
         with:
           version: ${{ steps.previoustag.outputs.tag }}
+          
       - name: Create release
         id: create_release_id
         uses: actions/create-release@v1
