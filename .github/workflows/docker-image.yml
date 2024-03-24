@@ -20,16 +20,16 @@ env:
   DOCKERHUB_USERNAME: stianhg
   
 jobs:
-  print_vars:
-    name: Print variables
-    runs-on: ubuntu-latest
-    steps: 
-      - name: Print
-        run: |
-          echo Registry = ${{ env.REGISTRY}}
-          echo Repository name = ${{github.repository}}
-          echo Token = ${{github.token}}
-          echo Dockerhub user name = ${{env.DOCKERHUB_USERNAME}}
+ # print_vars:
+ #   name: Print variables
+ #   runs-on: ubuntu-latest
+ #   steps: 
+ #     - name: Print
+ #       run: |
+ #         echo Registry = ${{ env.REGISTRY}}
+ #         echo Repository name = ${{github.repository}}
+ #         echo Token = ${{github.token}}
+ #         echo Dockerhub user name = ${{env.DOCKERHUB_USERNAME}}
           
   build_publish:
     name: Build and publish image
