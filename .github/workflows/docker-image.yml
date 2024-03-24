@@ -70,7 +70,7 @@ jobs:
             ${{ github.repository }}
             ${{ env.REGISTRY }}/${{ github.repository }}       
           tags: |
-            type=semver,pattern={{raw}
+            type=semver,pattern={{raw}}
             type=sha
        #     type=schedule
        #     type=ref,event=branch
