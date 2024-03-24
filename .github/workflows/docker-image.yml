@@ -4,9 +4,7 @@ permissions:
 on:
   push:
     branches: [ main ]
-    tags:
-      - "v*.*.*"
-
+    
   workflow_dispatch:
     inputs:
       pushImage:
@@ -19,18 +17,7 @@ env:
   REGISTRY: ghcr.io
   DOCKERHUB_USERNAME: stianhg
   
-jobs:
- # print_vars:
- #   name: Print variables
- #   runs-on: ubuntu-latest
- #   steps: 
- #     - name: Print
- #       run: |
- #         echo Registry = ${{ env.REGISTRY}}
- #         echo Repository name = ${{github.repository}}
- #         echo Token = ${{github.token}}
- #         echo Dockerhub user name = ${{env.DOCKERHUB_USERNAME}}
-          
+jobs:         
   build_publish:
     name: Build and publish image
     runs-on: ubuntu-latest
@@ -61,30 +48,16 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username:  ${{ github.actor}}
           password: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: |
-            ${{ github.repository }}
-            ${{ env.REGISTRY }}/${{ github.repository }}       
-          tags: |
-            type=semver,pattern={{raw}}
-            type=sha
-       #     type=schedule
-       #     type=ref,event=branch
-       #     type=ref,event=pr
-       #     type=semver,pattern={{version}}
-       #     type=semver,pattern={{major}}
-                   
+                  
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
           file: .github/Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: |
+            ${{ env.REGISTRY }}/${{ github.repository }}:latest
+            ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.nbgv.outputs.SemVer2 }}
           labels: ${{ steps.meta.outputs.labels }}
 
 
