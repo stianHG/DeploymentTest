@@ -49,18 +49,6 @@ jobs:
         with:
           setCommonVars: true
 
-      - name: Setup node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.15.0'
-          cache: 'yarn'
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Build
-        run: yarn build
-
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
