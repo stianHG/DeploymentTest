@@ -31,8 +31,8 @@ jobs:
           echo Token = ${{github.token}}
           echo Dockerhub user name = ${{env.DOCKERHUB_USERNAME}}
           
-  test_and_publish_linux:
-    name: Test and publish image for linux
+  build_publish:
+    name: Build and publish image
     runs-on: ubuntu-latest
 
     permissions:

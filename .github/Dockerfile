@@ -4,12 +4,12 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN yarn install
 
 COPY . .
 
 # React app for production
-RUN npm run build
+RUN yarn run build
 
 # Using Nginx for serving static files
 FROM nginx:alpine
