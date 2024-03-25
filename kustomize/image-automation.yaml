@@ -8,7 +8,7 @@ spec:
   interval: 5m0s
 
 ---
-apiVersion: image.toolkit.fluxcd.io/v1beta2
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
 kind: ImagePolicy
 metadata:
   name: deploymenttest
@@ -16,6 +16,9 @@ metadata:
 spec:
   imageRepositoryRef:
     name: deploymenttest
+ filterTags:
+    pattern: "^(?P<semver>.+?)-g[a-z0-9]+$"
+    extract: "$semver"
   policy:
-    alphabetical:
-      order: asc
+    semver:
+      range: ">0.0.0"
