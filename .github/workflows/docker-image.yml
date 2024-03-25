@@ -30,12 +30,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
        
-      - name: Set build version
-        uses: dotnet/nbgv@master
-        id: nbgv
-        with:
-          setCommonVars: true
-
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
