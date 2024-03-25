@@ -9,5 +9,5 @@ minikube dashboard
 minikube stop
 
 
-kubectl port-forward svc/loadbalancer 5002:80 --address=127.0.0.1
-kubectl port-forward svc/loadbalancer 5002:80 --address=192.168.68.123
+kubectl port-forward svc/app-service 5002:80 --address=127.0.0.1
+kubectl port-forward svc/app-service 5002:80 --address=192.168.68.123
