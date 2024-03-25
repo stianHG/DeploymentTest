@@ -1,0 +1,21 @@
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImageRepository
+metadata:
+  name: deploymenttest
+  namespace: default
+spec:
+  image: ghcr.io/stianhg/deploymenttest
+  interval: 5m0s
+
+---
+apiVersion: image.toolkit.fluxcd.io/v1alpha1
+kind: ImagePolicy
+metadata:
+  name: deploymenttest
+  namespace: default
+spec:
+  imageRepositoryRef:
+    name: deploymenttest
+  policy:
+    semver:
+      range: '>=0.0.1'
