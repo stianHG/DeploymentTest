@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Velkommen til en ny dag!
+          Velkommen til en ny dag! (igjen)
         </p>
         
       </header>
