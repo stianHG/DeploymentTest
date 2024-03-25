@@ -6,6 +6,7 @@ metadata:
 spec:
   image: ghcr.io/stianhg/deploymenttest
   interval: 5m0s
+  
 ---
 apiVersion: image.toolkit.fluxcd.io/v1alpha1
 kind: ImagePolicy
@@ -14,10 +15,10 @@ metadata:
   namespace: default
 spec:
   imageRepositoryRef:
-    name: deploymenttest
- filterTags:
+    name: staysafe-bff
+  filterTags:
     pattern: "^(?P<semver>.+?)-g[a-z0-9]+$"
     extract: "$semver"
   policy:
     semver:
-      range: ">0.0.0"
+      range: "0.1.407-g1044652b53"
