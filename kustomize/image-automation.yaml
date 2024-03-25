@@ -15,7 +15,7 @@ metadata:
   namespace: default
 spec:
   imageRepositoryRef:
-    name: staysafe-bff
+    name: deploymenttest
   filterTags:
     pattern: "^(?P<semver>.+?)-g[a-z0-9]+$"
     extract: "$semver"
