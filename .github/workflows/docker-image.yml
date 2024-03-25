@@ -57,7 +57,7 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ github.repository }}:latest
-            ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.nbgv.outputs.SemVer2 }}
+            ${{ env.REGISTRY }}/${{ github.repository }}:${{ GITHUB_SHA::7 }}
           labels: ${{ steps.meta.outputs.labels }}
 
 
