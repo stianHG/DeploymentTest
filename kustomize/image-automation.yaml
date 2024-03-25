@@ -48,5 +48,5 @@ spec:
     push:
       branch: main
   update:
-    path: ./clusters/my-cluster
+    path: ./clusters/my-cluster/image-automation.yaml
     strategy: Setters
