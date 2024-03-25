@@ -17,7 +17,7 @@ spec:
         image: ghcr.io/stianhg/deploymenttest # {"$imagepolicy": "flux-system:deploymenttest-policy"}
         imagePullPolicy: Always
         ports:
-        - containerPort: 80
+        - containerPort: 443
         env:
         - name: ENV_TEST
           value: "testValue"
