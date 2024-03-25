@@ -16,7 +16,7 @@ on:
 env:
   REGISTRY: ghcr.io
   DOCKERHUB_USERNAME: stianhg
-  
+
 jobs:         
   build_publish:
     name: Build and publish image
@@ -27,6 +27,21 @@ jobs:
       packages: write
       
     steps:
+      - name: Set environment variables
+        id: set-variables
+        run: |
+          echo "REPOSITORY=ghcr.io/$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
+          echo "IMAGE=store-front" >> "$GITHUB_OUTPUT"
+          echo "VERSION=$(echo ${GITHUB_REF#refs/tags/})" >> "$GITHUB_OUTPUT"
+          echo "CREATED=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_OUTPUT"          
+
+      - name: Env variable output
+        id: test-variables
+        run: |
+          echo ${{ steps.set-variables.outputs.REPOSITORY }}
+          echo ${{ steps.set-variables.outputs.IMAGE }}
+          echo ${{ steps.set-variables.outputs.VERSION }}
+          echo ${{ steps.set-variables.outputs.CREATED }}  
       - name: Checkout
         uses: actions/checkout@v4
        
