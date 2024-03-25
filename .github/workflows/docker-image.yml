@@ -51,7 +51,7 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ github.repository }}:latest
-            ${{ env.REGISTRY }}/${{ github.repository }}:${{ GITHUB_SHA::7 }}
+            ${{ env.REGISTRY }}/${{ github.repository }}:${{ GITHUB.SHA::7 }}
           labels: ${{ steps.meta.outputs.labels }}
 
 
