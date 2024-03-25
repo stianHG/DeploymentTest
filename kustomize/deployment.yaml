@@ -15,7 +15,6 @@ spec:
       containers:
       - name: deploymenttest
         image: ghcr.io/stianhg/deploymenttest:latest 
-        # {"$imagepolicy": "default:deploymenttest"} 
         imagePullPolicy: Always
         ports:
         - containerPort: 80
