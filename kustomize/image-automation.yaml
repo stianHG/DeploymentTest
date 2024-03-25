@@ -41,7 +41,7 @@ spec:
         branch: main
     commit:
       author:
-        email: stian@hack-godtfredsen.no
+        email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
       messageTemplate: "{{range .Updated.Images}}{{println .}}{{end}}"
     
