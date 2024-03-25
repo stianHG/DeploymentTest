@@ -39,6 +39,12 @@ spec:
     checkout:
       ref:
         branch: main
+    commit:
+      author:
+        email: stian@hack-godtfredsen.no
+        name: fluxcdbot
+      messageTemplate: "{{range .Updated.Images}}{{println .}}{{end}}"
+    
     push:
       branch: main
   update:
