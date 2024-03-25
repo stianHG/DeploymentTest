@@ -17,5 +17,5 @@ spec:
   imageRepositoryRef:
     name: deploymenttest
   policy:
-    semver:
-      range: '>=0.0.1'
+    alphabetical:
+      order: asc
