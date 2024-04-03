@@ -4,7 +4,8 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN yarn install
+# RUN yarn install
+RUN apt-get --assume-yes install yarn && apt-mark hold yarn 
 
 COPY . .
 
