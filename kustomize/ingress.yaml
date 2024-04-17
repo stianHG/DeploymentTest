@@ -4,7 +4,7 @@ metadata:
   name: app-ingress
 spec:
   rules:
-  - host: example.com
+  - host: hack-godtfredsen.no
     http:
       paths:
       - path: /
