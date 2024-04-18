@@ -18,7 +18,7 @@ spec:
     name: deploymenttest  
   policy:
     semver:
-      range: ">0.2.0"
+      range: '>=0.2.0'
       
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta1
