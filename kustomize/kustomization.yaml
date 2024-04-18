@@ -4,6 +4,6 @@ resources:
   # - hpa.yaml
   - deployment.yaml
   - service-nodeport.yaml
-  # - ingress.yaml
+  - ingress.yaml
   # - service-loadbalancer.yaml
   - image-automation.yaml
