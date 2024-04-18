@@ -94,3 +94,12 @@ jobs:
             ${{ env.REGISTRY }}/${{ github.repository }}:latest
             ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}     
+          
+      - name: Create release
+        id: create_release_id
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.semver.outputs.patch }}
+          release_name: Release ${{ steps.semver.outputs.patch }}
