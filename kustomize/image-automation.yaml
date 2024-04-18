@@ -15,10 +15,7 @@ metadata:
   namespace: default
 spec:
   imageRepositoryRef:
-    name: deploymenttest
-  filterTags:
-    pattern: "^(?P<semver>.+?)-g[a-z0-9]+$"
-    extract: "$semver"
+    name: deploymenttest  
   policy:
     semver:
       range: ">0.2.0"
