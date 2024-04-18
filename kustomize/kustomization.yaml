@@ -6,4 +6,4 @@ resources:
   - service-nodeport.yaml
   - ingress.yaml
   # - service-loadbalancer.yaml
-  #- image-automation.yaml
+  - image-automation.yaml
