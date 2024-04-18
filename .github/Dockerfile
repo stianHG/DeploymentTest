@@ -4,11 +4,10 @@ WORKDIR /app
 
 COPY package*.json ./
 
-# RUN yarn install
-RUN apk --no-cache --virtual build-dependencies add \
-  python \
-  make \
-  g++
+#RUN apk --no-cache --virtual build-dependencies add \
+#  python \
+#  make \
+#  g++
 RUN yarn install
 
 COPY . .
