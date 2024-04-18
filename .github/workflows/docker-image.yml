@@ -109,7 +109,7 @@ jobs:
           file: .github/Dockerfile
           push: true
           tags: |     
-            ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.tagger.output.new_tag }}
+            ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.tagger.outputs.new_tag }}
             ${{ env.REGISTRY }}/${{ github.repository }}:latest
             ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}     
