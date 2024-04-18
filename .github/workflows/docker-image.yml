@@ -60,6 +60,15 @@ jobs:
      #   uses: 'WyriHaximus/github-action-next-semvers@v1'
      #   with:
      #     version: ${{ steps.previoustag.outputs.tag }}
+
+      - name: Get versions (dryRun)
+        id: taggerDR
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: false
+          DEFAULT_BUMP: patch
+          DRY_RUN: true
           
       - name: Get versions (final)
         id: tagger
