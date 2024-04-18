@@ -49,17 +49,42 @@ jobs:
         with:
           fetch-depth: 0 
 
-      - name: Get previous tag
-        id: previoustag
-        uses: 'WyriHaximus/github-action-get-previous-tag@v1'
+    #  - name: Get previous tag
+    #    id: previoustag
+    #    uses: 'WyriHaximus/github-action-get-previous-tag@v1'
+    #    env:
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+     # - name: Get next minor version
+     #   id: semver
+     #   uses: 'WyriHaximus/github-action-next-semvers@v1'
+     #   with:
+     #     version: ${{ steps.previoustag.outputs.tag }}
+     
+      - name: Get versions (dryRun)
+        id: taggerDryRun
+        uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DRY_RUN: true
 
-      - name: Get next minor version
-        id: semver
-        uses: 'WyriHaximus/github-action-next-semvers@v1'
-        with:
-          version: ${{ steps.previoustag.outputs.tag }}
+      - name: echo new tag
+        run: |
+          echo "The next tag version will be: ${{ steps.taggerDryRun.outputs.new_tag }}"
+      - name: echo tag
+        run: |
+          echo "The current tag is: ${{ steps.taggerDryRun.outputs.tag }}"
+      - name: echo part
+        run: |
+          echo "The version increment was: ${{ steps.taggerDryRun.outputs.part }}"
+
+      - name: Get versions (final)
+        id: taggerFinal
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
           
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
@@ -92,16 +117,16 @@ jobs:
           file: .github/Dockerfile
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.semver.outputs.patch }}
+            # ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.semver.outputs.patch }}
             ${{ env.REGISTRY }}/${{ github.repository }}:latest
             ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}     
           
-      - name: Create release
-        id: create_release_id
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.semver.outputs.patch }}
-          release_name: Release ${{ steps.semver.outputs.patch }}
+    #  - name: Create release
+    #    id: create_release_id
+    #    uses: actions/create-release@v1
+    #    env:
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #    with:
+    #      tag_name: ${{ steps.semver.outputs.patch }}
+    #      release_name: Release ${{ steps.semver.outputs.patch }}
