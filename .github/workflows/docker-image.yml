@@ -91,8 +91,7 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ github.repository }}:latest
-            ${{ steps.meta.outputs.tags }}
-            ${{ steps.semver.outputs.patch }}
+            ${{ steps.meta.outputs.tags }}            
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Create release
