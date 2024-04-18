@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Versjon lansert 2024-04-18 14:54
+          Versjon lansert 2024-04-18 22:59
         </p>
         
       </header>
