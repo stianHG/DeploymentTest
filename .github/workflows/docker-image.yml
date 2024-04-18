@@ -60,31 +60,14 @@ jobs:
      #   uses: 'WyriHaximus/github-action-next-semvers@v1'
      #   with:
      #     version: ${{ steps.previoustag.outputs.tag }}
-     
-      - name: Get versions (dryRun)
-        id: taggerDryRun
-        uses: anothrNick/github-tag-action@1.36.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: false
-          DRY_RUN: true
-
-      - name: echo new tag
-        run: |
-          echo "The next tag version will be: ${{ steps.taggerDryRun.outputs.new_tag }}"
-      - name: echo tag
-        run: |
-          echo "The current tag is: ${{ steps.taggerDryRun.outputs.tag }}"
-      - name: echo part
-        run: |
-          echo "The version increment was: ${{ steps.taggerDryRun.outputs.part }}"
-
+          
       - name: Get versions (final)
-        id: taggerFinal
+        id: tagger
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: false
+          DEFAULT_BUMP: patch
           
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
@@ -116,7 +99,8 @@ jobs:
           context: .
           file: .github/Dockerfile
           push: true
-          tags: |            
+          tags: |       
+            ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.tagger.outputs.new_tag }}
             ${{ env.REGISTRY }}/${{ github.repository }}:latest
             ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}     
