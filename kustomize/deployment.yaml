@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: deploymenttest
-        image: ghcr.io/stianhg/deploymenttest:latest # {"$imagepolicy": "flux-system:deploymenttest_policy"}
+        image: ghcr.io/stianhg/deploymenttest:latest # {"$imagepolicy": "flux-system:deploymenttest-policy"}
         imagePullPolicy: Always
         ports:
         - containerPort: 80
