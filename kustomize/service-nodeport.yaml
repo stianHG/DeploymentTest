@@ -7,6 +7,6 @@ spec:
   selector:
     app: deploymenttest
   ports:
-    - port: 80
+    - port: 5002
       protocol: TCP
       targetPort: 80
