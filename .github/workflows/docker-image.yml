@@ -1,6 +1,8 @@
 name: Docker Image CI
 permissions:
   contents: write
+concurrency:
+  group: ${{ github.workflow }}
 on:
   push:
     branches: [ main ]
