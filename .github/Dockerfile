@@ -14,7 +14,9 @@ RUN yarn run build
 # Using Nginx for serving static files
 FROM nginx:alpine
 
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+
 # Copying the built files from the previous stage
 COPY --from=build /app/build /usr/share/nginx/html
 
-CMD ["nginx", "-g", "daemon off;"]
+#CMD ["nginx", "-g", "daemon off;"]
