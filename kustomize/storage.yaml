@@ -20,7 +20,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-pvc
-  namespace: hbr-keycloak
+  namespace: powermeter
   labels:
     app: postgres
 spec:
