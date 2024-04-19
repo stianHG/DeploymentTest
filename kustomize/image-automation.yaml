@@ -1,0 +1,49 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: deploymenttest
+  namespace: default
+spec:
+  image: ghcr.io/stianhg/deploymenttest
+  interval: 5m0s
+  
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: deploymenttest-policy
+  namespace: default
+spec:
+  imageRepositoryRef:
+    name: deploymenttest  
+  policy:
+    semver:
+      range: '>=0.0.1'
+      
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: image-update-automation
+  namespace: default
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: "{{range .Updated.Images}}{{println .}}{{end}}"
+    
+    push:
+      branch: main
+  update:
+    path: ./clusters/my-cluster/image-automation.yaml
+    strategy: Setters

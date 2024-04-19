@@ -1,12 +1,12 @@
 name: Docker Image CI
 permissions:
   contents: write
+concurrency:
+  group: ${{ github.workflow }}
 on:
   push:
     branches: [ main ]
-    tags:
-      - "v*.*.*"
-
+    
   workflow_dispatch:
     inputs:
       pushImage:
@@ -18,37 +18,45 @@ on:
 env:
   REGISTRY: ghcr.io
   DOCKERHUB_USERNAME: stianhg
-  
-jobs:
- # print_vars:
- #   name: Print variables
- #   runs-on: ubuntu-latest
- #   steps: 
- #     - name: Print
- #       run: |
- #         echo Registry = ${{ env.REGISTRY}}
- #         echo Repository name = ${{github.repository}}
- #         echo Token = ${{github.token}}
- #         echo Dockerhub user name = ${{env.DOCKERHUB_USERNAME}}
-          
+
+jobs:         
   build_publish:
     name: Build and publish image
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
+      contents: write
       packages: write
       
     steps:
+      - name: Set environment variables
+        id: set-variables
+        run: |
+          echo "REPOSITORY=ghcr.io/$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_OUTPUT"
+          echo "IMAGE=deploymenttest" >> "$GITHUB_OUTPUT"
+          echo "VERSION=$(echo ${GITHUB_REF#refs/tags/})" >> "$GITHUB_OUTPUT"
+          echo "CREATED=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_OUTPUT"          
+
+      - name: Env variable output
+        id: test-variables
+        run: |
+          echo ${{ steps.set-variables.outputs.REPOSITORY }}
+          echo ${{ steps.set-variables.outputs.IMAGE }}
+          echo ${{ steps.set-variables.outputs.VERSION }}
+          echo ${{ steps.set-variables.outputs.CREATED }}  
       - name: Checkout
         uses: actions/checkout@v4
-       
-      - name: Set build version
-        uses: dotnet/nbgv@master
-        id: nbgv
         with:
-          setCommonVars: true
-
+          fetch-depth: 0 
+          
+      - name: Get versions (final)
+        id: tagger
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: false
+          DEFAULT_BUMP: patch
+          
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
@@ -61,7 +69,7 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username:  ${{ github.actor}}
           password: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v5
@@ -72,19 +80,24 @@ jobs:
           tags: |
             type=semver,pattern={{raw}}
             type=sha
-       #     type=schedule
-       #     type=ref,event=branch
-       #     type=ref,event=pr
-       #     type=semver,pattern={{version}}
-       #     type=semver,pattern={{major}}
-                   
+                  
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
           file: .github/Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-
-
+          tags: |     
+            ${{ env.REGISTRY }}/${{ github.repository }}:${{ steps.tagger.outputs.new_tag }}
+            ${{ env.REGISTRY }}/${{ github.repository }}:latest
+            ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}     
+          
+    #  - name: Create release
+    #    id: create_release_id
+    #    uses: actions/create-release@v1
+    #    env:
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #    with:
+    #      tag_name: ${{ steps.semver.outputs.patch }}
+    #      release_name: Release ${{ steps.semver.outputs.patch }}
