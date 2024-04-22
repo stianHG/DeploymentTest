@@ -9,11 +9,12 @@ import { Card } from 'primereact/card';
 import Keycloak from 'keycloak-js';
 
 let initOptions = {
-  url: 'http://localhost:8080/',
-  realm: 'master',
-  clientId: 'react-client',
-  onLoad: 'check-sso', // check-sso | login-required
+  url: process.env.REACT_APP_KEYCLOAK_URL,
+  realm: process.env.REACT_APP_KEYCLOAK_REALM,
+  clientId: process.env.REACT_APP_KEYCLOAK_CLIENTID,
+  onLoad: 'login-required', // check-sso | login-required
   KeycloakResponseType: 'code',
+  pkceMethod: 'S256'
 
   // silentCheckSsoRedirectUri: (window.location.origin + "/silent-check-sso.html")
 }
