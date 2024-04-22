@@ -26,7 +26,7 @@ spec:
             port:
               number: 80
       - path: /kc
-        pathType: ImplemantationSpecific
+        pathType: ImplementationSpecific
         backend:
           service:
             name: keycloak
