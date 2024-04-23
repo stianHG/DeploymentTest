@@ -7,12 +7,12 @@ metadata:
     app: keycloak
 spec:
   ports:
-  - #name: https
+  - name: http
     port: 8080
     targetPort: 8080
   selector:
     app: keycloak
-  #type: LoadBalancer
+  type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -53,7 +53,7 @@ spec:
         - name: KC_METRICS_ENABLED
           value: "true"
         - name: KC_HOSTNAME_STRICT_HTTPS
-          value: "true"
+          value: "false"
         - name: KC_LOG_LEVEL
           value: INFO
         - name: KC_DB
