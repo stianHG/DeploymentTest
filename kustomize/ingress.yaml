@@ -7,7 +7,7 @@ metadata:
 #    ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: localhost
+  - host: auth.hack-godtfredsen.no
     http:
       paths:
       - path: /
@@ -36,7 +36,7 @@ spec:
             port:
               number: 8080
 
-    - host: auth.hack-godtfredsen.no
+  - host: localhost
     http:
       paths:
       - path: /
