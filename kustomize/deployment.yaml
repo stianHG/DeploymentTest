@@ -19,6 +19,12 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: ENV_TEST
-          value: "testValue"
+        - name: REACT_APP_KEYCLOAK_URL
+          valueFrom:
+          secretKeyRef: 
+          name: "testValue"
+          key: REACT_APP_KEYCLOAK_URL
           
+          : http://auth.hack-godtfredsen.no/
+  REACT_APP_KEYCLOAK_REALM: PowerMeter
+  REACT_APP_KEYCLOAK_CLIENTID: React
