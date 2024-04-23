@@ -6,6 +6,10 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: true
 spec:
+  tls:
+  - hosts:
+    - hack-godtfredsen.no
+    secretName: tls-secret
   rules:  
   - host: auth.hack-godtfredsen.no
     http:
