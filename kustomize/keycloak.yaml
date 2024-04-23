@@ -46,12 +46,12 @@ spec:
             secretKeyRef:
               key: KEYCLOAK_ADMIN_PASSWORD
               name: keycloak-secrets
-        - name: KC_PROXY
-          value: "edge"
-        - name: KC_HEALTH_ENABLED
-          value: "true"
-        - name: KC_METRICS_ENABLED
-          value: "true"
+       # - name: KC_PROXY
+       #   value: "edge"
+       # - name: KC_HEALTH_ENABLED
+       #   value: "true"
+        #- name: KC_METRICS_ENABLED
+        #  value: "true"
         - name: KC_HOSTNAME_STRICT_HTTPS
           value: "false"
         - name: KC_LOG_LEVEL
