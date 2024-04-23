@@ -21,10 +21,18 @@ spec:
         env:
         - name: REACT_APP_KEYCLOAK_URL
           valueFrom:
-          secretKeyRef: 
-          name: "testValue"
-          key: REACT_APP_KEYCLOAK_URL
+            secretKeyRef: 
+              name: react-app-secrets
+              key: REACT_APP_KEYCLOAK_URL         
           
-          : http://auth.hack-godtfredsen.no/
-  REACT_APP_KEYCLOAK_REALM: PowerMeter
-  REACT_APP_KEYCLOAK_CLIENTID: React
+        - name: REACT_APP_KEYCLOAK_REALM
+          valueFrom:
+            secretKeyRef: 
+              name: react-app-secrets
+              key: REACT_APP_KEYCLOAK_REALM
+              
+        - name: REACT_APP_KEYCLOAK_CLIENTID
+          valueFrom:
+            secretKeyRef: 
+              name: react-app-secrets
+              key: REACT_APP_KEYCLOAK_CLIENTID
