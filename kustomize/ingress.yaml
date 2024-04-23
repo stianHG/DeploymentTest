@@ -3,10 +3,10 @@ kind: Ingress
 metadata:
   name: general
   namespace: default
-# annotations:
-#    ingress.kubernetes.io/rewrite-target: /
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: true
 spec:
-  rules:
+  rules:  
   - host: auth.hack-godtfredsen.no
     http:
       paths:
