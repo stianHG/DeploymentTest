@@ -13,3 +13,4 @@ resources:
   - secrets.yaml
   - storage.yaml
   - clusterissuer.yaml
+  - certificate.yaml
