@@ -11,7 +11,7 @@ spec:
     solvers:
     - http01:
         ingress:
-          class: internal-nginx 
+          class: nginx 
           odTemplate:
             spec:
               nodeSelector:
