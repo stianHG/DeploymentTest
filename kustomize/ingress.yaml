@@ -8,10 +8,11 @@ metadata:
     cert-manager.io/cluster-issuer: cluster-issuer-name
     nginx.ingress.kubernetes.io/ssl-redirect: true
 spec:
+  ingressClassName: internal-nginx
   tls:
   - hosts:
     - hack-godtfredsen.no
-    secretName: secret-name
+    secretName: secret-tls
   rules:  
   - host: auth.hack-godtfredsen.no
     http:
