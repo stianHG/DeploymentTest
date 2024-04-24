@@ -11,4 +11,8 @@ spec:
     solvers:
     - http01:
         ingress:
-          class: nginx-class-name 
+          class: internal-nginx 
+          odTemplate:
+            spec:
+              nodeSelector:
+                "kubernetes.io/os": linux
