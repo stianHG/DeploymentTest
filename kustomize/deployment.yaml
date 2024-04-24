@@ -32,4 +32,4 @@ spec:
               key: REACT_APP_KEYCLOAK_REALM
               
         - name: REACT_APP_KEYCLOAK_CLIENTID
-          value: "React"
+          value: "React2"
