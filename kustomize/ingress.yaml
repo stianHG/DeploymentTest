@@ -4,12 +4,14 @@ metadata:
   name: general
   namespace: default
   annotations:
+    kubernetes.io/ingress.class: nginx-class-name
+    cert-manager.io/cluster-issuer: cluster-issuer-name
     nginx.ingress.kubernetes.io/ssl-redirect: true
 spec:
   tls:
   - hosts:
     - hack-godtfredsen.no
-    secretName: tls-secret
+    secretName: secret-name
   rules:  
   - host: auth.hack-godtfredsen.no
     http:
