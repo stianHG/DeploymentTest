@@ -12,3 +12,4 @@ resources:
   - keycloak.yaml
   - secrets.yaml
   - storage.yaml
+  - clusterissuer.yaml
