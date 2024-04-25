@@ -12,7 +12,7 @@ spec:
   tls:
   - hosts:
     - hack-godtfredsen.no
-    secretName: secret-tls
+    privateKeySecretRef: secret-tls
   rules:  
   - host: auth.hack-godtfredsen.no
     http:
