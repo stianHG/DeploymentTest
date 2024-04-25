@@ -88,7 +88,7 @@ function App() {
           </Card>
         </div>
         <div className='col-2'>
-        Auth: {process.env.REACT_APP_KEYCLOAK_URL}</div>
+       </div>
       </div>
 
 
