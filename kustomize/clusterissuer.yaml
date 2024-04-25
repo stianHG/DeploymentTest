@@ -12,7 +12,3 @@ spec:
     - http01:
         ingress:
           class: nginx 
-          odTemplate:
-            spec:
-              nodeSelector:
-                "kubernetes.io/os": linux
