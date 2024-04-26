@@ -8,7 +8,7 @@ spec:
     email: stian@hack-godtfredsen.no
     privateKeySecretRef:
       name: letsencrypt-prod
-    solvers:
-    - http01:
-        ingress:
-          class: nginx 
+  #  solvers:
+  #  - http01:
+  #      ingress:
+  #        class: nginx 
